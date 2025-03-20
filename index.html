@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #3a3a5e);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .payment-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .service-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .insta-id {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+        .qr-section img {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .qr-section img:hover {
+            transform: scale(1.1);
+        }
+        .amount-section, .utr-section {
+            margin-top: 20px;
+        }
+        .amount-value {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            font-size: 16px;
+            text-align: center;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: none;
+            background: #ff6b6b;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #ff4c4c;
+        }
+        #confirmation {
+            margin-top: 20px;
+            font-weight: bold;
+            display: none;
+            color: #ffd700;
+            animation: fadeIn 0.5s;
+        }
+        .slider {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+        }
+        .slider img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .slider-controls button {
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <h1 class="service-title">Instagram Services</h1>
+        <p class="insta-id">@your_instagram_id</p>
+        <div class="qr-section">
+            <img src="qr.jpg" alt="QR Code" id="qr-code">
+            <p class="edit-note">(You can update this QR code later)</p>
+        </div>
+        <div class="amount-section">
+            <p class="amount-value">Amount to Pay: ₹500</p>
+        </div>
+        <div class="utr-section">
+            <label for="utr">Enter UTR Number:</label>
+            <input type="text" id="utr" placeholder="Enter UTR Number">
+            <button onclick="submitUTR()">Submit</button>
+        </div>
+        <p id="confirmation" class="hidden">OK, your payment will be reviewed after 30 minutes. Please wait.</p>
+    </div>
+    
+    <div class="slider">
+        <div class="slider-controls">
+            <button onclick="prevSlide()">❮</button>
+            <button onclick="nextSlide()">❯</button>
+        </div>
+        <img id="slider-img" src="image1.jpg" alt="Work Image">
+    </div>
+
+    <script>
+        let images = ["image1.jpg", "image2.jpg", "image3.jpg"];
+        let index = 0;
+
+        function nextSlide() {
+            index = (index + 1) % images.length;
+            document.getElementById("slider-img").src = images[index];
+        }
+        function prevSlide() {
+            index = (index - 1 + images.length) % images.length;
+            document.getElementById("slider-img").src = images[index];
+        }
+
+        function submitUTR() {
+            document.getElementById('confirmation').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
